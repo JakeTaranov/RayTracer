@@ -24,6 +24,3 @@ class Sphere():
                                              [0, 0, self.scl_z, self.pos_z], 
                                              [0, 0, 0, 1]])
                                    .astype(float))
-        
-        
-

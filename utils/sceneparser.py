@@ -21,8 +21,6 @@ class SceneParser():
         self.ambient = np.array(self.data['AMBIENT']).astype(float)
         self.output_file = self.data['OUTPUT'][0]
         
-        
-        
     def makeLights(self):
         lights = []
         
@@ -50,7 +48,6 @@ class SceneParser():
         return spheres
     
     def makeDataDict(self):
-        
         data = {
             "SPHERES": [],
             "LIGHTS": []

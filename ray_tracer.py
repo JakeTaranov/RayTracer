@@ -5,7 +5,6 @@ import numpy as np
 EYE_ORIGIN = np.array([0,0,0])
 BLACK = np.array([0,0,0])
 
-
 class Ray:
     """
     Creates Ray Object (origin, direction, and a flag if it is a reflected ray)
@@ -21,8 +20,6 @@ class Ray:
     
     def reflect(self, norm):
         return -2 * (np.dot(norm, self.direction)) * norm + self.direction
-    
-                
             
 class Scene():
     """
@@ -133,6 +130,9 @@ class Scene():
 
     @staticmethod
     def compute_diffuse_specular(color, sphere, light_normal, light, ks):
+        """
+        Calculates the diffuse and specular lighting
+        """
         for i in range(3):
             #Diffuse
             color[i] += sphere.k_d*light.c[i] * \
@@ -204,6 +204,9 @@ class Scene():
                 return min_val
 
     def compute_ray_through_pixel(self, c, r):
+        """
+        Converts to world coordinates
+        """
         u_c = -1 + (2*r)/self.height
         v_r = -1 + (2*c)/self.width
         dir = self.normalize(np.array([u_c, v_r, self.near]))
@@ -212,9 +215,15 @@ class Scene():
     
     @staticmethod
     def normalize(x):
+        """
+        Normalizes vector / ray direction objects
+        """
         return x/np.linalg.norm(x)
 
 def convert_color_and_scale(color):
+    """
+    Generates the required format for ppm files
+    """
     return "%s %s %s" % (str(int(min(color[0]*255, 255))), str(int(min(color[1]*255, 255))), str(int(min(color[2]*255, 255))))
 
         
