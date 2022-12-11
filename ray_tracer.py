@@ -38,7 +38,6 @@ class Scene():
         self.bg_color = back
         self.max_depth = 3
 
-        
     def render(self):
         """
         Main render loop for scene, loops over each pixel and call ray_trace which returns the final color of the pixel
@@ -58,9 +57,7 @@ class Scene():
         """
         Recursive ray trace function. Recurs max_depth times, responsible for gathering intersecions and colors. 
         """
-        
         color = BLACK
-        
         # After 3 reflections per ray, we exit
         if depth >= self.max_depth:
             return color
@@ -68,7 +65,6 @@ class Scene():
         # Find the closests Ray-Sphere interesection 
         intersection_with_sphere, s_c = self.get_closest_intersection(
             ray, ray.is_reflected_ray)
-        
         
         # No collsion, so we return background color
         if intersection_with_sphere is None:
@@ -78,11 +74,9 @@ class Scene():
             # Else we return the color of the background
             return self.bg_color
 
-        
         distance, sphere = intersection_with_sphere
         s, c = s_c
         intersection_point = ray.point_at_intersection(distance)
-
 
         canonical = Ray(s, c, 0)
         canonical_intersection = canonical.point_at_intersection(distance)
@@ -101,7 +95,6 @@ class Scene():
         color_reflected = self.ray_trace(reflected_ray, depth + 1)
 
         return clocal + color_reflected*sphere.k_r
-    
     
     def sum_shadow_rays(self, intersection_point, sphere_surface_norm, sphere):
         """
@@ -135,8 +128,7 @@ class Scene():
             if intersection is None:
                 
                 color = self.compute_diffuse_specular(color, sphere, light_dot_normal, light, ks)
-                
-
+            
         return color
 
     @staticmethod
@@ -159,9 +151,6 @@ class Scene():
             np.dot(np.append(intersection_point, 0), np.transpose(sphere.m_inv)))
 
         return norm[:-1]
-    
-    
-    
 
     def get_closest_intersection(self, ray, is_reflected):
         """
@@ -186,7 +175,6 @@ class Scene():
                 s_c = s, c
 
         return intersection, s_c
-            
             
     def solve_quadratic(self, s, c, is_reflected):
         """
@@ -215,8 +203,6 @@ class Scene():
             if min_val >=1:
                 return min_val
 
-      
-                
     def compute_ray_through_pixel(self, c, r):
         u_c = -1 + (2*r)/self.height
         v_r = -1 + (2*c)/self.width
@@ -228,10 +214,8 @@ class Scene():
     def normalize(x):
         return x/np.linalg.norm(x)
 
-
 def convert_color_and_scale(color):
     return "%s %s %s" % (str(int(min(color[0]*255, 255))), str(int(min(color[1]*255, 255))), str(int(min(color[2]*255, 255))))
-
 
         
 def write_ppm_file(pixels):
@@ -252,7 +236,6 @@ def write_ppm_file(pixels):
         
     return header + '\n'.join(data_row)
             
-
 def main():
     if len(sys.argv) < 2:
         print("ERROR: missing test case file")
