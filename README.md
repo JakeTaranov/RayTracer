@@ -1,6 +1,6 @@
 # Simple Ray Tracer
 
-Using Python with Numpy, an implementation a basic backward (eye to light sources) ray tracing algorithm. 
+Using Python with Numpy, an implementation of a basic backward (eye to light sources) ray tracing algorithm. 
 
 Some examples of ray-traced scene outputs.
 
